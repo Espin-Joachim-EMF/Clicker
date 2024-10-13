@@ -1,4 +1,4 @@
-import { defaultValues } from "./constants/defaultValues.Js"
+import { upgrades } from "./constants/upgrades.js";
 
 let gem = document.querySelector('.gem-cost')
 let parsedGem = parseFloat(gem.innerHTML)
@@ -12,68 +12,7 @@ let gpc = 1
 
 let gps = 0
 
-const upgrades = [
-    {
-        name: 'clicker',
-        cost: document.querySelector('.clicker-cost'),
-        pasredCost: parseFloat(document.querySelector('.clicker-cost').innerHTML),
-        increase: document.querySelector(".clicker-increase"),
-        parsedIncrease: parseFloat(document.querySelector(".clicker-increase").innerHTML),
-        level: document.querySelector(".clicker-level"),
-        gemMultiplier: 1.025,
-        costMultiplier: 1.12,
-    },
-    {
-        name: 'pickaxe',
-        cost: document.querySelector('.pickaxe-cost'),
-        pasredCost: parseFloat(document.querySelector('.pickaxe-cost').innerHTML),
-        increase: document.querySelector(".pickaxe-increase"),
-        parsedIncrease: parseFloat(document.querySelector(".pickaxe-increase").innerHTML),
-        level: document.querySelector(".pickaxe-level"),
-        gemMultiplier: 1.03,
-        costMultiplier: 1.115,
-    },
-    {
-        name: 'miner',
-        cost: document.querySelector('.miner-cost'),
-        pasredCost: parseFloat(document.querySelector('.miner-cost').innerHTML),
-        increase: document.querySelector(".miner-increase"),
-        parsedIncrease: parseFloat(document.querySelector(".miner-increase").innerHTML),
-        level: document.querySelector(".miner-level"),
-        gemMultiplier: 1.035,
-        costMultiplier: 1.11,
-    },
-    {
-        name: 'factory',
-        cost: document.querySelector('.factory-cost'),
-        pasredCost: parseFloat(document.querySelector('.factory-cost').innerHTML),
-        increase: document.querySelector(".factory-increase"),
-        parsedIncrease: parseFloat(document.querySelector(".factory-increase").innerHTML),
-        level: document.querySelector(".factory-level"),
-        gemMultiplier: 1.04,
-        costMultiplier: 1.10,
-    }
 
-]
-
-function createUpgrades () {
-    const upgradesContainer = document.getElementById('upgrades-container')
-    const template = document.getElementById('upgrade-template').textContent
-
-    defaultValues.forEach((obj) => {
-       let html = template;
-
-       Object.keys(obj).forEach((key) => {
-        const regex = new RegExp(`{{${key}}}`, 'g');
-        html = html.replace(regex, obj[key])
-       })
-
-       upgradesContainer.innerHTML += html
-
-    })
-}
-
-createUpgrades()
 
 function incrementGem(event) {
     gem.innerHTML = Math.round(parsedGem += gpc)
@@ -121,7 +60,7 @@ function buyUpgrade(upgrade) {
     }
 }
 
-function save () {
+function save() {
     localStorage.clear()
 
     upgrades.map((upgrade) => {
@@ -135,15 +74,15 @@ function save () {
         localStorage.setItem(upgrade.name, obj)
 
     })
-    
+
     localStorage.setItem('gpc', JSON.stringify(gpc))
     localStorage.setItem('gps', JSON.stringify(gps))
     localStorage.setItem('gem', JSON.stringify(parsedGem))
 }
 
-function load (){
+function load() {
     upgrades.map((upgrade) => {
-        const savedValues =JSON.parse(localStorage.getItem(upgrade.name))
+        const savedValues = JSON.parse(localStorage.getItem(upgrade.name))
 
         upgrade.pasredCost = savedValues.parsedCost
         upgrade.parsedIncrease = savedValues.parsedIncrease
@@ -166,7 +105,7 @@ setInterval(() => {
     gem.innerHTML = Math.round(parsedGem)
     gpcText.innerHTML = Math.round(gpc)
     gpsText.innerHTML = Math.round(gps);
-}, 100)   
+}, 100)
 
 window.incrementGem = incrementGem
 window.buyUpgrade = buyUpgrade
