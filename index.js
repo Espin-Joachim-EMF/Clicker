@@ -1,3 +1,5 @@
+import { defaultValues } from "./constants/defaultValues.Js"
+
 let gem = document.querySelector('.gem-cost')
 let parsedGem = parseFloat(gem.innerHTML)
 
@@ -54,6 +56,25 @@ const upgrades = [
 
 ]
 
+function createUpgrades () {
+    const upgradesContainer = document.getElementById('upgrades-container')
+    const template = document.getElementById('upgrade-template').textContent
+
+    defaultValues.forEach((obj) => {
+       let html = template;
+
+       Object.keys(obj).forEach((key) => {
+        const regex = new RegExp(`{{${key}}}`, 'g');
+        html = html.replace(regex, obj[key])
+       })
+
+       upgradesContainer.innerHTML += html
+
+    })
+}
+
+createUpgrades()
+
 function incrementGem(event) {
     gem.innerHTML = Math.round(parsedGem += gpc)
 
@@ -100,9 +121,54 @@ function buyUpgrade(upgrade) {
     }
 }
 
+function save () {
+    localStorage.clear()
+
+    upgrades.map((upgrade) => {
+
+        const obj = JSON.stringify({
+            parsedlevel: parseFloat(upgrade.level.innerHTML),
+            parsedCost: upgrade.pasredCost,
+            parsedIncrease: upgrade.parsedIncrease,
+        })
+
+        localStorage.setItem(upgrade.name, obj)
+
+    })
+    
+    localStorage.setItem('gpc', JSON.stringify(gpc))
+    localStorage.setItem('gps', JSON.stringify(gps))
+    localStorage.setItem('gem', JSON.stringify(parsedGem))
+}
+
+function load (){
+    upgrades.map((upgrade) => {
+        const savedValues =JSON.parse(localStorage.getItem(upgrade.name))
+
+        upgrade.pasredCost = savedValues.parsedCost
+        upgrade.parsedIncrease = savedValues.parsedIncrease
+
+        upgrade.level.innerHTML = savedValues.parsedlevel
+        upgrade.cost.innerHTML = Math.round(upgrade.pasredCost)
+        upgrade.increase.innerHTML = upgrade.parsedIncrease
+
+    })
+
+    gpc = JSON.parse(localStorage.getItem('gpc'))
+    gps = JSON.parse(localStorage.getItem('gps'))
+    parsedGem = JSON.parse(localStorage.getItem('gem'))
+
+    gem.innerHTML = Math.round(parsedGem)
+}
+
 setInterval(() => {
     parsedGem += gps / 10
     gem.innerHTML = Math.round(parsedGem)
     gpcText.innerHTML = Math.round(gpc)
     gpsText.innerHTML = Math.round(gps);
-}, 100)
+}, 100)   
+
+window.incrementGem = incrementGem
+window.buyUpgrade = buyUpgrade
+window.save = save
+window.load = load
