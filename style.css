@@ -52,6 +52,10 @@ body {
     width: 50px;
 }
 
+.gem-img-container {
+    position: relative;
+}
+
 .upgrade {
     display: flex;
     align-items: center;
@@ -118,4 +122,40 @@ body {
     justify-content: center;
     font-weight: bold;
     font-size: 20px;
+}
+
+.fade-up {
+    animation: fade-up 1s;
+}
+
+@keyframes fade-up {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    20% {
+        transform: translateY(-5px);
+        opacity: 0.9;
+    }
+
+    40% {
+        transform: translateY(-13px);
+        opacity: 0.75;
+    }
+
+    60% {
+        transform: translateY(-25px);
+        opacity: 0.55;
+    }
+
+    80% {
+        transform: translateY(-42px);
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: translateY(-65px);
+        opacity: 0;
+    }
 }
