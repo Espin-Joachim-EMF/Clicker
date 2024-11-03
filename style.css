@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
 body {
     display: grid;
     place-items: center;
@@ -8,6 +10,7 @@ body {
     color: white;
     user-select: none;
     position: relative;
+    font-family: "Roboto Condensed", sans-serif;
 }
 
 .main {
@@ -15,14 +18,28 @@ body {
     gap: 200px;
 }
 
-.left h3 {
+.left {
     text-align: center;
     font-size: 30px;
-    margin-bottom: 30px;
+}
+
+.pink-text {
+    font-size: 32px;
+    color: rgb(202, 115, 243);
+    font-weight: 700;
+    text-shadow: 2px 2px 3px rgb(90, 90, 90);
+}
+
+.cost-text {
+    font-size: 18px;
 }
 
 .gem-image {
     width: 300px;
+}
+
+.gem-img-container {
+    position: relative;
 }
 
 .gem-image:hover {
@@ -41,8 +58,8 @@ body {
     justify-content: space-between;
     width: 330px;
     height: 60px;
-    border: 4px solid white;
-    padding: 10px 20px;
+    border: 3px solid white;
+    padding: 13px 20px;
     border-radius: 5px;
     position: relative;
     margin-bottom: 20px;
@@ -64,8 +81,8 @@ body {
 }
 
 .gem-img {
-    width: 20px;
-    height: 20px;
+    width: 26px;
+    height: 25px;
 }
 
 .cost-info {
@@ -77,14 +94,14 @@ body {
 .next-level-info {
     position: absolute;
     right: -105px;
-    background-color: rgb(90, 89,90);
+    background-color: rgb(90, 89, 90);
     height: 80px;
     width: 100px;
     text-align: center;
     display: none;
 }
 
-.upgrade:hover .next-level-info{
+.upgrade:hover .next-level-info {
     display: block;
 }
 
@@ -106,4 +123,35 @@ body {
     justify-content: center;
     font-weight: bold;
     font-size: 22px;
+}
+
+.fade-up {
+    animation: fade-up 1s;
+}
+
+@keyframes fade-up {
+    0%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+    20%{
+        transform: translateY(-5px);
+        opacity: 0.9;
+    }
+    40%{
+        transform: translateY(-13px);
+        opacity: 0.75;
+    }
+    60%{
+        transform: translateY(-25px);
+        opacity: 0.55;
+    }
+    80%{
+        transform: translateY(-42px);
+        opacity: 0.3;
+    }
+    100%{
+        transform: translateY(-65px);
+        opacity: 0;
+    }
 }
