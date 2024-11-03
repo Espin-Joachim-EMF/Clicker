@@ -29,8 +29,8 @@ const upgrades = [
         increase: document.querySelector(".pickaxe-increase"),
         parsedincrease: parseFloat(document.querySelector(".pickaxe-increase").innerHTML),
         level: document.querySelector(".pickaxe-level"),
-        gemMultiplier: 1.025,
-        costMultiplier: 1.12,
+        gemMultiplier: 1.03,
+        costMultiplier: 1.115,
     },
     {
         name: 'miner',
@@ -39,8 +39,18 @@ const upgrades = [
         increase: document.querySelector(".miner-increase"),
         parsedincrease: parseFloat(document.querySelector(".miner-increase").innerHTML),
         level: document.querySelector(".miner-level"),
-        gemMultiplier: 1.025,
-        costMultiplier: 1.12,
+        gemMultiplier: 1.035,
+        costMultiplier: 1.11,
+    },
+    {
+        name: 'factory',
+        cost: document.querySelector(".factory-cost"),
+        parsedCost: parseFloat(document.querySelector(".factory-cost").innerHTML),
+        increase: document.querySelector(".factory-increase"),
+        parsedincrease: parseFloat(document.querySelector(".factory-increase").innerHTML),
+        level: document.querySelector(".factory-level"),
+        gemMultiplier: 1.04,
+        costMultiplier: 1.10,
     },
 ]
 
