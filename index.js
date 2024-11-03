@@ -94,12 +94,49 @@ function buyUpgrade(upgrade) {
 
         if (mu.name === 'clicker') {
             gpc += mu.parsedincrease
-        }else{
+        } else {
             gps += mu.parsedincrease
         }
     }
 }
 
+function save() {
+    localStorage.clear()
+
+    upgrades.map((upgrade) => {
+
+        const obj = JSON.stringify({
+            parsedLevel: parseFloat(upgrade.level.innerHTML),
+            parsedCost: upgrade.parsedCost,
+            parsedincrease: upgrade.parsedincrease
+        })
+
+        localStorage.setItem(upgrade.name, obj)
+
+    })
+    localStorage.setItem('gpc', JSON.stringify(gpc))
+    localStorage.setItem('gps', JSON.stringify(gps))
+    localStorage.setItem('gem', JSON.stringify(parsedGem))
+}
+
+function load() {
+    upgrades.map((upgrade) => {
+        const savedValues = JSON.parse(localStorage.getItem(upgrade.name))
+
+        upgrade.parsedCost = savedValues.parsedCost
+        upgrade.parsedincrease = savedValues.parsedincrease
+
+        upgrade.level.innerHTML = savedValues.parsedLevel
+        upgrade.cost.innerHTML = Math.round(upgrade.parsedCost)
+        upgrade.increase.innerHTML = upgrade.parsedincrease
+    })
+
+    gpc = JSON.parse(localStorage.getItem('gpc'))
+    gps = JSON.parse(localStorage.getItem('gps'))
+    parsedGem = JSON.parse(localStorage.getItem('gem'))
+
+    gem.innerHTML = Math.round(parsedGem)
+}
 setInterval(() => {
     parsedGem += gps / 10
     gem.innerHTML = Math.round(parsedGem)
