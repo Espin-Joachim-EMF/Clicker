@@ -1,8 +1,6 @@
 let gem = document.querySelector(".gem-cost")
 let parsedGem = parseFloat(gem.innerHTML)
 
-
-
 let gpcText = document.getElementById("gpc-text")
 let gpsText = document.getElementById("gps-text")
 
